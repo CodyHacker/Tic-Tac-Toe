@@ -40,10 +40,19 @@ private
   end
 
   def three_in_line(x_or_o)
+    #check columns
+    if @@tic_tac_toe_board.flatten[0] == x_or_o && @@tic_tac_toe_board.flatten[3] == x_or_o && @@tic_tac_toe_board.flatten[6] == x_or_o ||
+      @@tic_tac_toe_board.flatten[1] == x_or_o && @@tic_tac_toe_board.flatten[4] == x_or_o && @@tic_tac_toe_board.flatten[7] == x_or_o ||  
+      @@tic_tac_toe_board.flatten[2] == x_or_o && @@tic_tac_toe_board.flatten[5] == x_or_o && @@tic_tac_toe_board.flatten.last == x_or_o    
+      return true
+    end
+
+    #check diags
     if @@tic_tac_toe_board.flatten.first == x_or_o && @@tic_tac_toe_board.flatten[4] == x_or_o && @@tic_tac_toe_board.flatten.last == x_or_o ||
       @@tic_tac_toe_board.flatten[2] == x_or_o && @@tic_tac_toe_board.flatten[4] == x_or_o && @@tic_tac_toe_board.flatten[6] == x_or_o      
-      true
+      return true
     end
+    #check rows
     @@tic_tac_toe_board.each do |row|
       if row.all? {|cell| cell == x_or_o}
         return true
@@ -62,10 +71,47 @@ my_game = GameBoard.new
 GameBoard.display_board
 puts
 
-my_game.make_move(0,0,"O")
-my_game.make_move(0,1,"X")
-my_game.make_move(0,2,"X")
+#check left to right diags
+# my_game.make_move(0,0,"X")
+# my_game.make_move(1,1,"X")
+# my_game.make_move(2,2,"X")
 
+#check right to left left diags
+# my_game.make_move(0,2,"X")
+# my_game.make_move(1,1,"X")
+# my_game.make_move(2,0,"X")
+
+#Top row
+# my_game.make_move(0,0,"X")
+# my_game.make_move(0,1,"X")
+# my_game.make_move(0,2,"X")
+
+#Middle row
+# my_game.make_move(1,0,"X")
+# my_game.make_move(1,1,"X")
+# my_game.make_move(1,2,"X")
+
+#Bottom row
+# my_game.make_move(2,0,"X")
+# my_game.make_move(2,1,"X")
+# my_game.make_move(2,2,"X")
+
+#First column
+my_game.make_move(0,0,"X")
+my_game.make_move(1,0,"X")
+my_game.make_move(2,0,"X")
+
+#Second column
+# my_game.make_move(0,1,"X")
+# my_game.make_move(1,1,"X")
+# my_game.make_move(2,1,"X")
+
+#Third column
+# my_game.make_move(0,2,"X")
+# my_game.make_move(1,2,"X")
+# my_game.make_move(2,2,"X")
+
+# p GameBoard.show_array.flatten
 
 
 
