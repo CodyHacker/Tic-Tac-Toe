@@ -110,8 +110,7 @@ until my_game.check_if_won_or_even?(x_or_o)
       print "Invalid entry, please enter as row, column where row and column are (0..2): "
     end
   end
-puts row
-puts column
+
   if my_game.make_move(row, column, x_or_o)
     if my_game.check_if_won_or_even?(x_or_o)
       puts
