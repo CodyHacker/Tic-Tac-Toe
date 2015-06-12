@@ -15,14 +15,19 @@ class GameBoard
     end
   end
 
-  def check_if_won?(x_or_o)
-    if three_in_line(x_or_o)
+  def check_if_won_or_even?(x_or_o)
+    if three_in_line?(x_or_o)
       puts
       puts x_or_o + " wins!"
       puts
       return true
+    elsif no_nils?
+        puts
+        puts "A Tie!"
+        puts
+        return true
     else
-      return false
+       return false
     end
   end
 
@@ -47,7 +52,15 @@ private
     puts
   end
 
-  def three_in_line(x_or_o)
+  def no_nils?
+    if @@tic_tac_toe_board.flatten.any? {|cell| cell.nil?}
+      return false
+    else
+      return true
+    end
+  end
+
+  def three_in_line?(x_or_o)
     #check columns
     if @@tic_tac_toe_board.flatten[0] == x_or_o && @@tic_tac_toe_board.flatten[3] == x_or_o && @@tic_tac_toe_board.flatten[6] == x_or_o ||
       @@tic_tac_toe_board.flatten[1] == x_or_o && @@tic_tac_toe_board.flatten[4] == x_or_o && @@tic_tac_toe_board.flatten[7] == x_or_o ||  
@@ -73,12 +86,10 @@ end
 
 
 
-
-
 my_game = GameBoard.new
 x_or_o = "X"
 
-until my_game.check_if_won?(x_or_o)
+until my_game.check_if_won_or_even?(x_or_o)
   puts
   GameBoard.display_board
   puts
@@ -87,68 +98,15 @@ until my_game.check_if_won?(x_or_o)
   row = the_arguments[0].to_i
   column = the_arguments[-1].to_i
   if my_game.make_move(row, column, x_or_o)
-    if my_game.check_if_won?(x_or_o)
+    if my_game.check_if_won_or_even?(x_or_o)
       puts
       GameBoard.display_board
       puts
       exit
     end
-      x_or_o = x_or_o == "X" ? "O" : "X"
+    x_or_o = x_or_o == "X" ? "O" : "X"
   end
 end
 
 
-
-#check left to right diags
-# my_game.make_move(0,0,"X")
-# my_game.make_move(1,1,"X")
-# my_game.make_move(2,2,"X")
-
-#check right to left left diags
-# my_game.make_move(0,2,"X")
-# my_game.make_move(1,1,"X")
-# my_game.make_move(2,0,"X")
-
-#Top row
-# my_game.make_move(0,0,"X")
-# my_game.make_move(0,1,"X")
-# my_game.make_move(0,2,"X")
-
-#Middle row
-# my_game.make_move(1,0,"X")
-# my_game.make_move(1,1,"X")
-# my_game.make_move(1,2,"X")
-
-#Bottom row
-# my_game.make_move(2,0,"X")
-# my_game.make_move(2,1,"X")
-# my_game.make_move(2,2,"X")
-
-#First column
-# my_game.make_move(0,0,"X")
-# my_game.make_move(1,0,"X")
-# my_game.make_move(2,0,"X")
-
-#Second column
-# my_game.make_move(0,1,"X")
-# my_game.make_move(1,1,"O")
-# my_game.make_move(2,1,"O")
-
-#Third column
-# my_game.make_move(0,2,"X")
-# my_game.make_move(1,2,"X")
-# my_game.make_move(2,2,"X")
-
-# p GameBoard.show_array.flatten
-
-
-
-# GameBoard.display_board
-# my_game.check_if_won("X")
-
-
-
-
-# tic_tac_toe_board[2][2] = "O"
-# tic_tac_toe_board[1][1] = "O"
 
