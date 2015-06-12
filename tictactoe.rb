@@ -89,14 +89,15 @@ end
 my_game = GameBoard.new
 
 x_or_o = "X" #X starts, change to O for O to start.
-
+row = nil
+column = nil
 until my_game.check_if_won_or_even?(x_or_o)
   puts
   GameBoard.display_board
   puts
   print x_or_o + ", please enter your move: "
 
-  while true
+  loop do
     the_arguments = gets.chomp
     row = the_arguments[0]
     column = the_arguments[-1]
@@ -109,7 +110,8 @@ until my_game.check_if_won_or_even?(x_or_o)
       print "Invalid entry, please enter as row, column where row and column are (0..2): "
     end
   end
-
+puts row
+puts column
   if my_game.make_move(row, column, x_or_o)
     if my_game.check_if_won_or_even?(x_or_o)
       puts
@@ -119,6 +121,7 @@ until my_game.check_if_won_or_even?(x_or_o)
     end
     x_or_o = x_or_o == "X" ? "O" : "X"
   end
+
 end
 
 
