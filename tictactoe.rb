@@ -15,10 +15,14 @@ class GameBoard
     end
   end
 
-  def check_if_won(x_or_o)
+  def check_if_won?(x_or_o)
     if three_in_line(x_or_o)
+      puts
       puts x_or_o + " wins!"
-      exit
+      puts
+      return true
+    else
+      return false
     end
   end
 
@@ -29,14 +33,18 @@ class GameBoard
 
     if @@tic_tac_toe_board[@row][@column].nil?
       @@tic_tac_toe_board[@row][@column] = @x_or_o
+      return true
     else
       warn_user
+      return false
     end
   end
 
 private
   def warn_user
+    puts
     puts "That square is taken!"
+    puts
   end
 
   def three_in_line(x_or_o)
@@ -66,10 +74,30 @@ end
 
 
 
-my_game = GameBoard.new
 
-GameBoard.display_board
-puts
+my_game = GameBoard.new
+x_or_o = "X"
+
+until my_game.check_if_won?(x_or_o)
+  puts
+  GameBoard.display_board
+  puts
+  puts x_or_o + ", please enter your move: "
+  the_arguments = gets.chomp
+  row = the_arguments[0].to_i
+  column = the_arguments[-1].to_i
+  if my_game.make_move(row, column, x_or_o)
+    if my_game.check_if_won?(x_or_o)
+      puts
+      GameBoard.display_board
+      puts
+      exit
+    end
+      x_or_o = x_or_o == "X" ? "O" : "X"
+  end
+end
+
+
 
 #check left to right diags
 # my_game.make_move(0,0,"X")
@@ -97,14 +125,14 @@ puts
 # my_game.make_move(2,2,"X")
 
 #First column
-my_game.make_move(0,0,"X")
-my_game.make_move(1,0,"X")
-my_game.make_move(2,0,"X")
+# my_game.make_move(0,0,"X")
+# my_game.make_move(1,0,"X")
+# my_game.make_move(2,0,"X")
 
 #Second column
 # my_game.make_move(0,1,"X")
-# my_game.make_move(1,1,"X")
-# my_game.make_move(2,1,"X")
+# my_game.make_move(1,1,"O")
+# my_game.make_move(2,1,"O")
 
 #Third column
 # my_game.make_move(0,2,"X")
@@ -115,8 +143,8 @@ my_game.make_move(2,0,"X")
 
 
 
-GameBoard.display_board
-my_game.check_if_won("X")
+# GameBoard.display_board
+# my_game.check_if_won("X")
 
 
 
